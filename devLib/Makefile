@@ -24,6 +24,8 @@
 VERSION=$(shell cat ../VERSION)
 DESTDIR?=/usr
 PREFIX?=/local
+INCLUDEDIR?=$(PREFIX)/include
+LIBDIR?=$(PREFIX)/lib
 
 LDCONFIG?=ldconfig
 
@@ -88,22 +90,22 @@ tags:	$(SRC)
 .PHONY:	install
 install:	$(DYNAMIC)
 	$Q echo "[Install Headers]"
-	$Q install -m 0755 -d						$(DESTDIR)$(PREFIX)/include
-	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(PREFIX)/include
+	$Q install -m 0755 -d						$(DESTDIR)$(INCLUDEDIR)
+	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(INCLUDEDIR)
 	$Q echo "[Install Dynamic Lib]"
-	$Q install -m 0755 -d						$(DESTDIR)$(PREFIX)/lib
-	$Q install -m 0755 libwiringPiDev.so.$(VERSION)			$(DESTDIR)$(PREFIX)/lib/libwiringPiDev.so.$(VERSION)
-	$Q ln -sf libwiringPiDev.so.$(VERSION)				$(DESTDIR)$(PREFIX)/lib/libwiringPiDev.so
+	$Q install -m 0755 -d						$(DESTDIR)$(LIBDIR)
+	$Q install -m 0755 libwiringPiDev.so.$(VERSION)			$(DESTDIR)$(LIBDIR)/libwiringPiDev.so.$(VERSION)
+	$Q ln -sf libwiringPiDev.so.$(VERSION)				$(DESTDIR)$(LIBDIR)/libwiringPiDev.so
 	$Q $(LDCONFIG)
 
 .PHONY:	install-static
 install-static:	$(STATIC)
 	$Q echo "[Install Headers]"
-	$Q install -m 0755 -d						$(DESTDIR)$(PREFIX)/include
-	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(PREFIX)/include
+	$Q install -m 0755 -d						$(DESTDIR)$(INCLUDEDIR)
+	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(INCLUDEDIR)
 	$Q echo "[Install Static Lib]"
-	$Q install -m 0755 -d						$(DESTDIR)$(PREFIX)/lib
-	$Q install -m 0755 libwiringPiDev.a				$(DESTDIR)$(PREFIX)/lib
+	$Q install -m 0755 -d						$(DESTDIR)$(LIBDIR)
+	$Q install -m 0755 libwiringPiDev.a				$(DESTDIR)$(LIBDIR)
 
 .PHONY:	install-deb
 install-deb:	$(DYNAMIC)
@@ -118,8 +120,8 @@ install-deb:	$(DYNAMIC)
 .PHONY:	uninstall
 uninstall:
 	$Q echo "[UnInstall]"
-	$Q cd $(DESTDIR)$(PREFIX)/include/ && rm -f $(HEADERS)
-	$Q cd $(DESTDIR)$(PREFIX)/lib/     && rm -f libwiringPiDev.*
+	$Q cd $(DESTDIR)$(INCLUDEDIR)/ && rm -f $(HEADERS)
+	$Q cd $(DESTDIR)$(LIBDIR)/     && rm -f libwiringPiDev.*
 	$Q $(LDCONFIG)
 
 

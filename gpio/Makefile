@@ -25,6 +25,10 @@
 
 DESTDIR?=/usr
 PREFIX?=/local
+BINDIR?=$(PREFIX)/bin
+INCLUDEDIR?=$(PREFIX)/include
+LIBDIR?=$(PREFIX)/lib
+MANDIR?=$(PREFIX)/man
 
 ifneq ($V,1)
 Q ?= @
@@ -33,10 +37,10 @@ endif
 #DEBUG	= -g -O0
 DEBUG	= -O2
 CC	= gcc
-INCLUDE	= -I$(DESTDIR)$(PREFIX)/include
+INCLUDE	= -I$(DESTDIR)$(INCLUDEDIR)
 CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
 
-LDFLAGS	= -L$(DESTDIR)$(PREFIX)/lib
+LDFLAGS	= -L$(DESTDIR)$(LIBDIR)
 LIBS    = -lwiringPi -lwiringPiDev -lpthread
 
 # May not need to  alter anything below this line
@@ -72,14 +76,14 @@ tags:	$(SRC)
 .PHONY:	install
 install: gpio
 	$Q echo "[Install]"
-	$Q mkdir -p		$(DESTDIR)$(PREFIX)/bin
-	$Q cp gpio		$(DESTDIR)$(PREFIX)/bin
+	$Q mkdir -p		$(DESTDIR)$(BINDIR)
+	$Q cp gpio		$(DESTDIR)$(BINDIR)
 ifneq ($(WIRINGPI_SUID),0)
-	$Q chown root.root	$(DESTDIR)$(PREFIX)/bin/gpio
-	$Q chmod 4755		$(DESTDIR)$(PREFIX)/bin/gpio
+	$Q chown root.root	$(DESTDIR)$(BINDIR)/gpio
+	$Q chmod 4755		$(DESTDIR)$(BINDIR)/gpio
 endif
-	$Q mkdir -p		$(DESTDIR)$(PREFIX)/man/man1
-	$Q cp gpio.1		$(DESTDIR)$(PREFIX)/man/man1
+	$Q mkdir -p		$(DESTDIR)$(MANDIR)/man1
+	$Q cp gpio.1		$(DESTDIR)$(MANDIR)/man1
 
 .PHONY:	install-deb
 install-deb:	gpio
@@ -90,8 +94,8 @@ install-deb:	gpio
 .PHONY:	uninstall
 uninstall:
 	$Q echo "[UnInstall]"
-	$Q rm -f $(DESTDIR)$(PREFIX)/bin/gpio
-	$Q rm -f $(DESTDIR)$(PREFIX)/man/man1/gpio.1
+	$Q rm -f $(DESTDIR)$(BINDIR)/gpio
+	$Q rm -f $(DESTDIR)$(MANDIR)/man1/gpio.1
 
 .PHONY:	depend
 depend:
