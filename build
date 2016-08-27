@@ -171,7 +171,7 @@ echo All Done.
 echo ""
 echo "NOTE: To compile programs with wiringPi, you need to add:"
 echo "    -lwiringPi"
-echo "  to your compile line(s) To use the Gertboard, MaxDetect, etc."
+echo "  to your compile line(s). To use the Gertboard, MaxDetect, etc."
 echo "  code (the devLib), you need to also add:"
 echo "    -lwiringPiDev"
 echo "  to your compile line(s)."
