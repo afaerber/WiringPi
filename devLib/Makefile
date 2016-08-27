@@ -63,36 +63,36 @@ all:		$(DYNAMIC)
 static:		$(STATIC)
 
 $(STATIC):	$(OBJ)
-	$Q echo "[Link (Static)]"
+	@echo "[Link (Static)]"
 	$Q ar rcs $(STATIC) $(OBJ)
 	$Q ranlib $(STATIC)
-#	@size   $(STATIC)
+#	$Q size   $(STATIC)
 
 $(DYNAMIC):	$(OBJ)
-	$Q echo "[Link (Dynamic)]"
+	@echo "[Link (Dynamic)]"
 	$Q $(CC) -shared -Wl,-soname,libwiringPiDev.so$(WIRINGPI_SONAME_SUFFIX) -o libwiringPiDev.so.$(VERSION) -lpthread $(OBJ)
 
 .c.o:
-	$Q echo [Compile] $<
+	@echo [Compile] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 .PHONY:	clean
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) $(OBJ_I2C) *~ core tags Makefile.bak libwiringPiDev.*
 
 .PHONY:	tags
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 
 .PHONY:	install
 install:	$(DYNAMIC)
-	$Q echo "[Install Headers]"
+	@echo "[Install Headers]"
 	$Q install -m 0755 -d						$(DESTDIR)$(INCLUDEDIR)
 	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(INCLUDEDIR)
-	$Q echo "[Install Dynamic Lib]"
+	@echo "[Install Dynamic Lib]"
 	$Q install -m 0755 -d						$(DESTDIR)$(LIBDIR)
 	$Q install -m 0755 libwiringPiDev.so.$(VERSION)			$(DESTDIR)$(LIBDIR)/libwiringPiDev.so.$(VERSION)
 	$Q ln -sf libwiringPiDev.so.$(VERSION)				$(DESTDIR)$(LIBDIR)/libwiringPiDev.so
@@ -100,26 +100,26 @@ install:	$(DYNAMIC)
 
 .PHONY:	install-static
 install-static:	$(STATIC)
-	$Q echo "[Install Headers]"
+	@echo "[Install Headers]"
 	$Q install -m 0755 -d						$(DESTDIR)$(INCLUDEDIR)
 	$Q install -m 0644 $(HEADERS)					$(DESTDIR)$(INCLUDEDIR)
-	$Q echo "[Install Static Lib]"
+	@echo "[Install Static Lib]"
 	$Q install -m 0755 -d						$(DESTDIR)$(LIBDIR)
 	$Q install -m 0755 libwiringPiDev.a				$(DESTDIR)$(LIBDIR)
 
 .PHONY:	install-deb
 install-deb:	$(DYNAMIC)
-	$Q echo "[Install Headers: deb]"
+	@echo "[Install Headers: deb]"
 	$Q install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/include
 	$Q install -m 0644 $(HEADERS)						~/wiringPi/debian-template/wiringPi/usr/include
-	$Q echo "[Install Dynamic Lib: deb]"
+	@echo "[Install Dynamic Lib: deb]"
 	install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/lib
 	install -m 0755 libwiringPiDev.so.$(VERSION)				~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so.$(VERSION)
 	ln -sf ~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so.$(VERSION)	~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so
 
 .PHONY:	uninstall
 uninstall:
-	$Q echo "[UnInstall]"
+	@echo "[UnInstall]"
 	$Q cd $(DESTDIR)$(INCLUDEDIR)/ && rm -f $(HEADERS)
 	$Q cd $(DESTDIR)$(LIBDIR)/     && rm -f libwiringPiDev.*
 	$Q $(LDCONFIG)

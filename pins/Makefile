@@ -7,7 +7,7 @@ endif
 
 
 all:		${SRC}
-	$Q echo	Generating DVI
+	@echo	Generating DVI
 	$Q latex  pins.tex
 
 pins.dvi:	pins.tex

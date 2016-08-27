@@ -47,31 +47,31 @@ BINS	=	$(SRC:.c=)
 all:	$(BINS)
 
 test:	test.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ test.o $(LDFLAGS) $(LDLIBS)
 
 scphat:	scphat.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ scphat.o $(LDFLAGS) $(LDLIBS)
 
 
 .c.o:
-	$Q echo [CC] $<
+	@echo [CC] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) *~ core tags $(BINS)
 
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 install:	scphat
-	$Q echo Installing scphat into /usr/local/bin
+	@echo Installing scphat into /usr/local/bin
 	$Q cp -a scphat /usr/local/bin/scphat
 	$Q chmod 755 /usr/local/bin/scphat
-	$Q echo Done. Remember to load the I2C drivers if needed.
+	@echo Done. Remember to load the I2C drivers if needed.
 
 depend:
 	makedepend -Y $(SRC)

@@ -46,36 +46,36 @@ BINS	=	$(SRC:.c=)
 all:	$(BINS)
 
 blink:	blink.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ blink.o $(LDFLAGS) $(LDLIBS)
 
 blink-io:	blink-io.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ blink-io.o $(LDFLAGS) $(LDLIBS)
 
 button:	button.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ button.o $(LDFLAGS) $(LDLIBS)
 
 volts:	volts.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ volts.o $(LDFLAGS) $(LDLIBS)
 
 bright:	bright.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ bright.o $(LDFLAGS) $(LDLIBS)
 
 
 .c.o:
-	$Q echo [CC] $<
+	@echo [CC] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) *~ core tags $(BINS)
 
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 depend:

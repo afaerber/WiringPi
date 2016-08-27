@@ -47,39 +47,39 @@ BINS	=	$(SRC:.c=)
 all:	$(BINS)
 
 blink:	blink.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ blink.o $(LDFLAGS) $(LDLIBS)
 
 buttons:	buttons.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ buttons.o $(LDFLAGS) $(LDLIBS)
 
 reaction:	reaction.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ reaction.o $(LDFLAGS) $(LDLIBS)
 
 ladder:	ladder.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ ladder.o $(LDFLAGS) $(LDLIBS)
 
 metro:	metro.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ metro.o $(LDFLAGS) $(LDLIBS)
 
 motor:	motor.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ motor.o $(LDFLAGS) $(LDLIBS)
 
 .c.o:
-	$Q echo [CC] $<
+	@echo [CC] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) *~ core tags $(BINS)
 
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 depend:

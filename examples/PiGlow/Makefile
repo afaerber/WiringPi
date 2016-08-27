@@ -47,34 +47,34 @@ BINS	=	$(SRC:.c=)
 all:	$(BINS)
 
 piGlow0:	piGlow0.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ piGlow0.o $(LDFLAGS) $(LDLIBS)
 
 piGlow1:	piGlow1.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ piGlow1.o $(LDFLAGS) $(LDLIBS)
 
 piglow:	piglow.o
-	$Q echo [link]
+	@echo [link]
 	$Q $(CC) -o $@ piglow.o $(LDFLAGS) $(LDLIBS)
 
 .c.o:
-	$Q echo [CC] $<
+	@echo [CC] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) *~ core tags $(BINS)
 
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 install:	piglow
-	$Q echo Installing piglow into /usr/local/bin
+	@echo Installing piglow into /usr/local/bin
 	$Q cp -a piglow /usr/local/bin/piglow
 	$Q chmod 755 /usr/local/bin/piglow
-	$Q echo Done. Remember to load the I2C drivers!
+	@echo Done. Remember to load the I2C drivers!
 
 depend:
 	makedepend -Y $(SRC)

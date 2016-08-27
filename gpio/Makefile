@@ -53,29 +53,29 @@ OBJ	=	$(SRC:.c=.o)
 all:		gpio
 
 version.h:	../VERSION
-	$Q echo Need to run newVersion above.
+	@echo Need to run newVersion above.
 
 gpio:	$(OBJ)
-	$Q echo [Link]
+	@echo [Link]
 	$Q $(CC) -o $@ $(OBJ) $(LDFLAGS) $(LIBS)
 
 .c.o:
-	$Q echo [Compile] $<
+	@echo [Compile] $<
 	$Q $(CC) -c $(CFLAGS) $< -o $@
 
 .PHONY:	clean
 clean:
-	$Q echo "[Clean]"
+	@echo "[Clean]"
 	$Q rm -f $(OBJ) gpio *~ core tags *.bak
 
 .PHONY:	tags
 tags:	$(SRC)
-	$Q echo [ctags]
+	@echo [ctags]
 	$Q ctags $(SRC)
 
 .PHONY:	install
 install: gpio
-	$Q echo "[Install]"
+	@echo "[Install]"
 	$Q mkdir -p		$(DESTDIR)$(BINDIR)
 	$Q cp gpio		$(DESTDIR)$(BINDIR)
 ifneq ($(WIRINGPI_SUID),0)
@@ -87,13 +87,13 @@ endif
 
 .PHONY:	install-deb
 install-deb:	gpio
-	$Q echo "[Install: deb]"
+	@echo "[Install: deb]"
 	$Q install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/bin
 	$Q install -m 0755 gpio							~/wiringPi/debian-template/wiringPi/usr/bin
 
 .PHONY:	uninstall
 uninstall:
-	$Q echo "[UnInstall]"
+	@echo "[UnInstall]"
 	$Q rm -f $(DESTDIR)$(BINDIR)/gpio
 	$Q rm -f $(DESTDIR)$(MANDIR)/man1/gpio.1
 
