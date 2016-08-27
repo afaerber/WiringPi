@@ -82,14 +82,14 @@ ifneq ($(WIRINGPI_SUID),0)
 	$Q chown root.root	$(DESTDIR)$(BINDIR)/gpio
 	$Q chmod 4755		$(DESTDIR)$(BINDIR)/gpio
 endif
+ifneq ($(WIRINGPI_INSTALL_MAN),0)
 	$Q mkdir -p		$(DESTDIR)$(MANDIR)/man1
 	$Q cp gpio.1		$(DESTDIR)$(MANDIR)/man1
+endif
 
 .PHONY:	install-deb
 install-deb:	gpio
-	@echo "[Install: deb]"
-	$Q install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/bin
-	$Q install -m 0755 gpio							~/wiringPi/debian-template/wiringPi/usr/bin
+	$(MAKE) install DESTDIR=~/wiringPi/debian-template/wiringPi PREFIX=/usr WIRINGPI_SUID=0 WIRINGPI_INSTALL_MAN=0
 
 .PHONY:	uninstall
 uninstall:

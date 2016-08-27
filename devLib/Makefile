@@ -112,13 +112,7 @@ install-static:	$(STATIC)
 
 .PHONY:	install-deb
 install-deb:	$(DYNAMIC)
-	@echo "[Install Headers: deb]"
-	$Q install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/include
-	$Q install -m 0644 $(HEADERS)						~/wiringPi/debian-template/wiringPi/usr/include
-	@echo "[Install Dynamic Lib: deb]"
-	install -m 0755 -d							~/wiringPi/debian-template/wiringPi/usr/lib
-	install -m 0755 libwiringPiDev.so.$(VERSION)				~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so.$(VERSION)
-	ln -sf ~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so.$(VERSION)	~/wiringPi/debian-template/wiringPi/usr/lib/libwiringPiDev.so
+	$(MAKE) install DESTDIR=~/wiringPi/debian-template/wiringPi PREFIX=/usr LDCONFIG=:
 
 .PHONY:	uninstall
 uninstall:
