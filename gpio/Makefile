@@ -23,8 +23,8 @@
 #    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 
-DESTDIR?=/usr
-PREFIX?=/local
+DESTDIR?=
+PREFIX?=/usr/local
 BINDIR?=$(PREFIX)/bin
 INCLUDEDIR?=$(PREFIX)/include
 LIBDIR?=$(PREFIX)/lib

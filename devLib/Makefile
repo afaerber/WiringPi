@@ -22,8 +22,8 @@
 #################################################################################
 
 VERSION=$(shell cat ../VERSION)
-DESTDIR?=/usr
-PREFIX?=/local
+DESTDIR?=
+PREFIX?=/usr/local
 INCLUDEDIR?=$(PREFIX)/include
 LIBDIR?=$(PREFIX)/lib
 
