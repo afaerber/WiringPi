@@ -1,6 +1,6 @@
 /*
  * piFace.:
- *	Arduino compatable (ish) Wiring library for the Raspberry Pi
+ *	Arduino compatible (ish) Wiring library for the Raspberry Pi
  *	Copyright (c) 2012-2013 Gordon Henderson
  *
  *	This file to interface with the PiFace peripheral device which

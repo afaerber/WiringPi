@@ -1,6 +1,6 @@
 #
 # Makefile:
-#	wiringPi - Wiring Compatable library for the Raspberry Pi
+#	wiringPi - Wiring compatible library for the Raspberry Pi
 #
 #	Copyright (c) 2012-2015 Gordon Henderson
 #################################################################################
