@@ -22,7 +22,7 @@
 #    along with wiringPi.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 
-.PHONY: all static clean install install-static uninstall
+.PHONY: all static clean install install-static install-deb uninstall
 
 all:
 	$(MAKE) all -C wiringPi libwiringPi.so
@@ -46,3 +46,8 @@ install: all
 install-static: static
 	$(MAKE) install-static -C wiringPi
 	$(MAKE) install-static -C devLib
+
+install-deb: # Do not depend on all
+	$(MAKE) install-deb -C wiringPi
+	$(MAKE) install-deb -C devLib INCLUDE='-I. -I../wiringPi'
+	$(MAKE) install-deb -C gpio INCLUDE='-I../wiringPi -I../devLib' LDFLAGS=-L../debian-template/wiringPi/usr/lib
